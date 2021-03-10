@@ -4,19 +4,23 @@ import br.com.mcos.pockotlinspringboot.controller.dto.JogoResponse
 import br.com.mcos.pockotlinspringboot.controller.dto.NovoJogoRequest
 import br.com.mcos.pockotlinspringboot.domain.Jogo
 import br.com.mcos.pockotlinspringboot.repository.JogoRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.lang.RuntimeException
+import java.net.URI
 
 @RestController
 @RequestMapping("api/jogos")
-class JogoController(val repository: JogoRepository) {
+class JogoController(
+    @Autowired
+    val repository: JogoRepository,
+) {
 
     @PostMapping
-    fun cria(@RequestBody request: NovoJogoRequest) : JogoResponse {
+    fun cria(@RequestBody request: NovoJogoRequest) : ResponseEntity<JogoResponse> {
         val novoJogo = request.paraJogo()
         val jogoSalvo = repository.save(novoJogo)
-        return JogoResponse(jogoSalvo)
+        return ResponseEntity.created(URI.create("teste")).body(JogoResponse(jogoSalvo))
     }
 
     @GetMapping

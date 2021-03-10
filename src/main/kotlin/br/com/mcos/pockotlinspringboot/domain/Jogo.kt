@@ -1,5 +1,6 @@
 package br.com.mcos.pockotlinspringboot.domain
 
+import java.math.BigDecimal
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -11,6 +12,6 @@ data class Jogo(
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     val id: Long? = null,
     val titulo: String,
-    val preco: Int,
+    val preco: BigDecimal,
     val ano: Int,
 )
