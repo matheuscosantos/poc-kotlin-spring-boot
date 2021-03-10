@@ -25,7 +25,7 @@ class TestJogo(
     @BeforeEach
     fun setup() {
         val jogo1 = Jogo(1, "Neverwinter", "0.00".toBigDecimal(), 2015)
-        val jogo2 = Jogo(2, "Star Wars - Falling Order", "50.00".toBigDecimal(), 2019)
+        val jogo2 = Jogo(2, "Star Wars - Fallen Order", "50.00".toBigDecimal(), 2019)
         repository.save(jogo1)
         repository.save(jogo2)
     }
@@ -58,13 +58,13 @@ class TestJogo(
 
     @Test
     fun deveSolicitarABuscaDeUmJogoPorIdERetornar400(): Unit{
-        val jogo1 = Jogo(1, "Neverwinter", "0.00".toBigDecimal(), 2015)
-        val jogo2 = Jogo(2, "Star Wars - Falling Order", "50.00".toBigDecimal(), 2019)
+//        val jogo1 = Jogo(1, "Neverwinter", "0.00".toBigDecimal(), 2015)
+//        val jogo2 = Jogo(2, "Star Wars - Fallen Order", "50.00".toBigDecimal(), 2019)
 
-        val jsonResponse = """{"id":2,"titulo":"Star Wars - Falling Order","preco":50.00,"ano":2019}"""
+        val jsonResponse = """{"id":2,"titulo":"Star Wars - Fallen Order","preco":50.00,"ano":2019}"""
 
-        repository.save(jogo1)
-        repository.save(jogo2)
+//        repository.save(jogo1)
+//        repository.save(jogo2)
 
         val request = MockMvcRequestBuilders
             .get("/api/jogos/2")
@@ -80,7 +80,7 @@ class TestJogo(
     fun deveSolicitarAAtualizacaoDeUmJogoERetornar400(): Unit{
 
         val requestJogoAtualizado = NovoJogoRequest(
-            "Star Wars - Falling Order - Atualizado",
+            "Star Wars - Fallen Order - Atualizado",
             "50.00".toBigDecimal(),
             2019
         )
@@ -88,7 +88,7 @@ class TestJogo(
         val jogoJson = mapper?.writeValueAsString(requestJogoAtualizado)
 
         val jsonResponse = """{"id":2,
-            |"titulo":"Star Wars - Falling Order - Atualizado",
+            |"titulo":"Star Wars - Fallen Order - Atualizado",
             |"preco":50.00,"ano":2019}""".trimMargin()
 
         val request = MockMvcRequestBuilders
